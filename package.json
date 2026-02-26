@@ -1,0 +1,14 @@
+{
+  "name": "wiki-reloader",
+  "version": "1.0.0",
+  "description": "This app reloads the docusaurus by recieving a github request.",
+  "license": "MIT",
+  "author": "Aztlan Consulting",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
