@@ -3,7 +3,7 @@ const discord = require('../utils/discordWebhook');
 exports.atPullRequest = async (request, response) => {
     const gitData = request.body;
 
-    console.log(gitData);
+    // console.log(gitData);
 
     const isPr = gitData.pull_request != null;
     const isPush = gitData.pusher != null;
