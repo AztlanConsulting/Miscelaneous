@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const path = require("path");
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
+//const getData = require('./utils/data');
 
 // Loads the variables in the enviorment file
-require("dotenv").config();
+require('dotenv').config();
 
 // Allows to read x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
