@@ -3,27 +3,38 @@ exports.parseData = (gitData) => {
     const isPush = gitData.pusher != null;
 
     const repository = gitData.repository.name;
+    const cloneUrl = gitData.repository.clone_url;
 
     if (isPr && gitData.pull_request.state == 'open') {
         const baseBranch = gitData.pull_request.base.ref;
         const incomingBranch = gitData.pull_request.head.ref;
         const sender = gitData.pull_request.user.login;
+        const latestBranch = incomingBranch;
+        const headCommit = gitData.pull_request.head.sha;
 
         return {
             message,
             repository,
             baseBranch,
             incomingBranch,
-            sender
+            latestBranch,
+            sender,
+            headCommit,
+            cloneUrl
         }
     }
 
     const branch = gitData.ref.split("/")[2];
+    const latestBranch = branch;
     const sender = gitData.sender.login;
+    const headCommit = gitData.head_commit.id;
     
     return {
         repository,
         branch,
-        sender
+        latestBranch,
+        sender,
+        headCommit,
+        cloneUrl
     }
 };
