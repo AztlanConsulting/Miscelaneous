@@ -1,11 +1,10 @@
+const mutex = require('./mutex')
 const path = require("path"); 
 const fs = require('node:fs');
 
 const idMap = new Map();
 const githubMap = new Map();
 const schoolMap = new Map();
-
-// Id, GithubId, DiscordId
 
 // Read data from file
 fs.readFile(path.join(__dirname, '../users.txt'), 'utf8', (err, data) => {
@@ -28,6 +27,8 @@ fs.readFile(path.join(__dirname, '../users.txt'), 'utf8', (err, data) => {
         githubMap.set(github, structure);
         schoolMap.set(schoolMap, structure);
     }
+
+    mutex.createDocusaurusMutexArray(users.length);
 });
 
 exports.getFromId = (id) => {

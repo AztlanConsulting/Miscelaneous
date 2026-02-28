@@ -5,6 +5,7 @@ REPO_DIR=$2
 BASE_DIR=$3
 REPO_CLONE=$4
 BRANCH=$5
+REPO_NAME=$6
 
 cd $REPO_DIR/
 
@@ -18,7 +19,7 @@ else
     cd $ID
 fi
 
-cd Wiki/ # TODO: Pasar el nombre
+cd $REPO_NAME/
 
 git fetch origin
 git checkout $BRANCH
