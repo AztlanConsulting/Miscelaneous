@@ -14,7 +14,7 @@ function errorMessage(user) {
 }
 
 function successMessage(user) {
-    return `<@${user.discord}>, el deploy de tu docusaurus acaba de terminar!\nPuedes acceder a éste a través de X / .`;
+    return `<@${user.discord}>, el deploy de tu docusaurus acaba de terminar!\nPuedes acceder a éste a través de ${process.env.BASE_DOCUSAURUS}/${user.school} o de http://{BASE_DOCUSAURUS_LOCAL}/${user.school} / .`;
 }
 
 exports.process = async (user, parsedGitData, discordWebhook, directory) => {
