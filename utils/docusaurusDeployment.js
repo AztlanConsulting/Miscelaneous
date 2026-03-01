@@ -6,7 +6,7 @@ const { promisify } = require('util');
 const execAsync = promisify(exec);
 
 function startMessage(user) {
-    return `<@${user}>, el deploy de tu docusaurus está en proceso.\nEn breve te llegará otro mensaje diciéndote que está listo.`;
+    return `<@${user.discord}>, el deploy de tu docusaurus está en proceso.\nEn breve te llegará otro mensaje diciéndote que está listo.`;
 }
 
 function errorMessage(user) {

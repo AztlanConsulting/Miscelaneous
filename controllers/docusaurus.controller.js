@@ -1,6 +1,5 @@
 const github = require('../utils/githubWebhook');
 const mutex = require('../utils/mutex');
-require("dotenv").config();
 
 exports.atEvent = async (request, response) => {
     const gitData = request.body;

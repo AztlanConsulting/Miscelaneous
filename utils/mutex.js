@@ -1,7 +1,6 @@
 const mutex = require('async-mutex');
 const userData = require('./data');
 const deploy = require('./docusaurusDeployment');
-require("dotenv").config();
 
 const docusaurusLocks = [];
 
