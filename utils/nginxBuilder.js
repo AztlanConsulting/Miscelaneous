@@ -16,7 +16,7 @@ exports.build = async () => {
         proxy_set_header X-Forwarded-Proto $scheme;
     }`;
 
-    for (let i = 1; i <= userData.getAmount(); i++) {
+    for (let i = 1; i < userData.getAmount(); i++) {
         configFile += `\n\n\tlocation /${process.env.MISCELANEOUS_PROXY}/${userData.getFromId(String(i)).school}/ {
         alias ${baseBuildsDir}/${userData.getFromId(String(i)).school}/;
         index index.html;
@@ -28,5 +28,5 @@ exports.build = async () => {
 
     console.log(configFile);
 
-    await userData.writeFile(configFile, path.join(__dirname, '../nginx.conf'));
+    // await userData.writeFile(configFile, '/etc/nginx/sites-available/default');
 }

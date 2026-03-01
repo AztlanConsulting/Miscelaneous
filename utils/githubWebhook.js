@@ -24,7 +24,7 @@ exports.parseData = (gitData) => {
         }
     }
 
-    const branch = gitData.ref.split("/")[2];
+    const branch = gitData.ref.split("refs/heads/")[1];
     const latestBranch = branch;
     const sender = gitData.sender.login;
     const headCommit = gitData.head_commit.id;

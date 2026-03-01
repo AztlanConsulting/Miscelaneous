@@ -14,6 +14,7 @@ if [ ! -d $ID ]; then
     mkdir $ID
     cd $ID
     git clone $REPO_CLONE
+    sudo chown -R $USER:$USER $REPO_NAME
     mkdir -p $BASE_DIR/$ID/
 else
     cd $ID
@@ -25,8 +26,13 @@ git fetch origin
 git checkout $BRANCH
 git pull origin $BRANCH
 
+sed -i "s|^  baseUrl.*$|  baseUrl: '/$REPO_NAME/$ID/',|" docusaurus.config.js
+
 npm install
 npm run build
 
-rm -rf $BASE_DIR/$ID
-mv build $BASE_DIR/$ID
+git stash
+git stash clear
+
+sudo rm -rf $BASE_DIR/$ID
+sudo mv build $BASE_DIR/$ID
