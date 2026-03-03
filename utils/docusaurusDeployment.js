@@ -37,8 +37,8 @@ exports.process = async (user, parsedGitData, discordWebhook, directory) => {
         if (user !== null) {
             await discord.sendWebhook(discordWebhook, errorMessage(user), user.discord);
         }
-
-        throw err;
+        
+        return;
     }
 
     // Inform that the deployment ended
