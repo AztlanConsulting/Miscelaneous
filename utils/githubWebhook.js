@@ -11,6 +11,7 @@ exports.parseData = (gitData) => {
         const sender = gitData.pull_request.user.login;
         const latestBranch = incomingBranch;
         const headCommit = gitData.pull_request.head.sha;
+        const after = gitData.after;
 
         return {
             message,
@@ -20,7 +21,8 @@ exports.parseData = (gitData) => {
             latestBranch,
             sender,
             headCommit,
-            cloneUrl
+            cloneUrl,
+            after
         }
     }
 

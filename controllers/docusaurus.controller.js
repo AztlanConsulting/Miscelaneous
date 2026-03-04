@@ -11,7 +11,9 @@ exports.atEvent = async (request, response) => {
     const parsedGitData = github.parseData(gitData);
 
     // Deploy process
-    mutex.deployDocusaurus(parsedGitData, discordWebhook);
+    if (parsedGitData.after != "0000000000000000000000000000000000000000") {
+        mutex.deployDocusaurus(parsedGitData, discordWebhook);
+    }
 
     response.status(200).json({message: parsedGitData.sender});
 }
