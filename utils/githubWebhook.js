@@ -11,7 +11,6 @@ exports.parseData = (gitData) => {
         const sender = gitData.pull_request.user.login;
         const latestBranch = incomingBranch;
         const headCommit = gitData.pull_request.head.sha;
-        const after = gitData.after;
 
         return {
             message,
@@ -29,7 +28,7 @@ exports.parseData = (gitData) => {
     const branch = gitData.ref.split("refs/heads/")[1];
     const latestBranch = branch;
     const sender = gitData.sender.login;
-    const headCommit = gitData.head_commit.id;
+    const headCommit = gitData.after;
     
     return {
         repository,
