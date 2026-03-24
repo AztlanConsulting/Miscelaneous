@@ -1,4 +1,5 @@
 const discord = require('./discordWebhook'); 
+const ip = require('./getLocalIP'); 
 const path = require("path"); 
 
 const { exec } = require('child_process');
@@ -13,8 +14,8 @@ function errorMessage(user) {
     return `<@${user.discord}>, el deploy de tu docusaurus falló.\nRevisa que no tenga errores y vuelve a intentar.`;
 }
 
-function successMessage(user) {
-    return `<@${user.discord}>, el deploy de tu docusaurus acaba de terminar!\nPuedes acceder a éste a través de ${process.env.BASE_DOCUSAURUS}/${user.school}/ o de ${process.env.BASE_DOCUSAURUS_LOCAL}/${user.school}/ .`;
+function successMessage(user, localIP) {
+    return `<@${user.discord}>, el deploy de tu docusaurus acaba de terminar!\nPuedes acceder a éste a través de https://${localIP}${process.env.DOCUSAURUS_LOCAL_ROUTE}/${user.school}/ o de ${process.env.BASE_DOCUSAURUS_LOCAL}/${user.school}/ .`;
 }
 
 exports.process = async (user, parsedGitData, discordWebhook, directory) => {
@@ -26,6 +27,7 @@ exports.process = async (user, parsedGitData, discordWebhook, directory) => {
     const bashFile = path.join(__dirname, '../scripts/deployDocusaurus.sh');
     const reposAddress = path.join(__dirname, '../repos');
     const buildsAddress = path.join(__dirname, '../builds');
+    const localIP = await ip.getLocal();
 
     const script = `${bashFile} ${directory} ${reposAddress} ${buildsAddress} ${parsedGitData.cloneUrl} ${parsedGitData.headCommit} ${parsedGitData.repository}`;
 
@@ -43,6 +45,6 @@ exports.process = async (user, parsedGitData, discordWebhook, directory) => {
 
     // Inform that the deployment ended
     if (user !== null) {
-        await discord.sendWebhook(discordWebhook, successMessage(user), user.discord);
+        await discord.sendWebhook(discordWebhook, successMessage(user, localIP), user.discord);
     }
 }
